@@ -1,0 +1,37 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "demoRPG",
+            "request": "launch",
+            "mainClass": "ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.demoRPG",
+            "projectName": "ActividadPromocion_Prog1_Barella_d4225cff"
+        },
+        {
+            "type": "java",
+            "name": "demoRPG",
+            "request": "launch",
+            "mainClass": "ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.demoRPG",
+            "projectName": "ActividadPromocion_Prog1_Barella_71763664",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "ActividadPromocion_Prog1_Barella_71763664",
+            "console": "externalTerminal"
+        }
+    ]
+}

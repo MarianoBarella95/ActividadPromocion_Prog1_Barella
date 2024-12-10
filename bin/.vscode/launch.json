@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "demoRPG",
+            "request": "launch",
+            "mainClass": "ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.demoRPG",
+            "projectName": "src_c5037fb9",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "demoRPG",
+            "request": "launch",
+            "mainClass": "demoRPG",
+            "projectName": "src_c5037fb9",
+            "console": "externalTerminal"
+        }
+    ]
+}
