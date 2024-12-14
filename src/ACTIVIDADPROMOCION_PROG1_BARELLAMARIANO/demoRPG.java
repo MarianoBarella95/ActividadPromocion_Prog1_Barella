@@ -2,6 +2,8 @@ package ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO;
 
 import ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.Clases.*;
 
+import javax.print.attribute.standard.JobOriginatingUserName;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.time.*;
 
@@ -15,8 +17,10 @@ public class demoRPG {
     private void setCantGanadores(int cantGanadores) {
         this.cantGanadores = cantGanadores;
     }
- 
+
     public static void main(String[] args) throws Exception {
+
+        ImageIcon iconoMenu = new ImageIcon("src/guerrero.jpeg");
 
         boolean conditionMenu = true;
 
@@ -39,10 +43,10 @@ public class demoRPG {
                     try {
                         String[] opciones = { "Comenzar Juego", "Listar Jugadores", "Mostrar Ganadores",
                                 "Ver Ganador (Por menos intentos)", "Listar Jugadores por Raza",
-                                "Ver Ganador (Por menos tiempo)", "Salir del Juego" };
+                                "Ver Ganador (Por menos tiempo)", "Buscar Jugador por Id", "Salir del Juego" };
 
                         String opcion = (String) JOptionPane.showInputDialog(null, "Selecciona una opción",
-                                "Menú de Opciones", 2, null, opciones, opciones[0]);
+                                "Menú de Opciones", 2, iconoMenu, opciones, opciones[0]);
 
                         switch (opcion) {
                             case "Comenzar Juego":
@@ -62,6 +66,7 @@ public class demoRPG {
                                             Monstruo monstruo = new Monstruo(100);
                                             Jugadores[i] = j;
                                             j.cargarGuerrero(i + 1);
+                                            j.setId(i + 1);
                                             menuJuego();
                                             int saludJugador = Jugadores[i].getSalud();
                                             int intentosJugador = Jugadores[i].getIntentos();
@@ -108,6 +113,7 @@ public class demoRPG {
                                             Monstruo monstruo1 = new Monstruo(100);
                                             Jugadores[i] = m;
                                             m.cargarMago(i + 1);
+                                            m.setId(i + 1);
                                             menuJuego();
                                             int saludJugadorMago = Jugadores[i].getSalud();
                                             int intentosJugadorMago = Jugadores[i].getIntentos();
@@ -125,7 +131,6 @@ public class demoRPG {
                                                     System.out.println("Te infringió -20 de daño.");
                                                     saludJugadorMago -= 20;
                                                     intentosJugadorMago++;
-                                                    System.out.println("Intentos: " + intentosJugadorMago);
                                                     JOptionPane.showMessageDialog(null,
                                                             "Te infringió -20 de daño.\nSalud "
                                                                     + Jugadores[i].getNombre()
@@ -157,6 +162,7 @@ public class demoRPG {
                                             Monstruo monstruo2 = new Monstruo(100);
                                             Jugadores[i] = o;
                                             o.cargarOrco(i + 1);
+                                            o.setId(i + 1);
                                             menuJuego();
                                             int saludJugadorOrco = Jugadores[i].getSalud();
                                             int intentosJugadorOrco = Jugadores[i].getIntentos();
@@ -221,13 +227,31 @@ public class demoRPG {
                                 /*
                                  * MOSTRAR GANADOR POR INTENTOS
                                  */
-                                ordenarGanadores(Jugadores, cantJugadores, cantGanadores);
-                                for (int j = 0; j < Jugadores.length; j++) {
-                                    if (Jugadores[j].getGano()) {
-                                        JOptionPane.showMessageDialog(null, "El jugador" + Jugadores[j].getNombre()
-                                                + " ganó " + " con " + Jugadores[j].getIntentos() + " intentos.");
+                                try {
+                                    if (cantJugadores == 0 || cantGanadores == 0) {
+                                        JOptionPane.showMessageDialog(null, "No hay jugadores o ganadores para mostrar",
+                                                "Error", 1);
+                                    } else {
+                                        ordenarGanadores(Jugadores, cantJugadores, cantGanadores);
+
+                                        /*
+                                         * LUEGO DE ORDENAR POR INTENTOS
+                                         * REALIZA UNA BÚSQUEDA SECUENCIAL PARA ENCONTRAR
+                                         * EL JUGADOR CON MENOS INTENTOS
+                                         */
+
+                                        for (int j = 0; j < Jugadores.length; j++) {
+                                            if (Jugadores[j].getGano()) {
+                                                JOptionPane.showMessageDialog(null,
+                                                        "El jugador" + Jugadores[j].getNombre()
+                                                                + " ganó " + " con " + Jugadores[j].getIntentos()
+                                                                + " intentos.");
+                                            }
+                                            break;
+                                        }
                                     }
-                                    break;
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(null, "Ocurrió un error", "Error", 0);
                                 }
                                 break;
                             case "Listar Jugadores por Raza":
@@ -254,19 +278,32 @@ public class demoRPG {
                                 JOptionPane.showMessageDialog(null, mensaje, "Cantidad de Jugadores por Raza", 1);
                                 break;
                             case "Ver Ganador (Por menos tiempo)":
-                                ganadorTiempo(Jugadores, cantJugadores, cantGanadores);
-                                for (int j = 0; j < Jugadores.length; j++) {
-                                    if (Jugadores[j].getGano()) {
-                                        System.out.println("\n\t********************************");
-                                        System.out.println("\n\tEl jugador " + Jugadores[j].getNombre() + " ganó " +
-                                                "con " + Jugadores[j].getTiempoJuego() + " segundos.");
-                                        System.out.println("\n\t********************************");
+                                if (cantJugadores == 0 || cantGanadores == 0) {
+                                    JOptionPane.showMessageDialog(null, "No hay jugadores o ganadores para mostrar.",
+                                            "Error", 1);
+                                } else {
+                                    ganadorTiempo(Jugadores, cantJugadores, cantGanadores);
+                                    for (int j = 0; j < Jugadores.length; j++) {
+                                        if (Jugadores[j].getGano()) {
+                                            JOptionPane.showMessageDialog(null,
+                                                    "El jugador " + Jugadores[j].getNombre() + " ganó con "
+                                                            + Jugadores[j].getTiempoJuego() + " segundos.",
+                                                    "Ganador por Tiempo", JOptionPane.INFORMATION_MESSAGE);
+                                        }
+                                        break;
                                     }
-                                    break;
                                 }
+                                break;
+                            case "Buscar Jugador por Id":
+                                int nABuscar = Integer.parseInt(JOptionPane.showInputDialog(null,
+                                        "Ingrese el número a buscar", null, JOptionPane.QUESTION_MESSAGE));
+                                buscarId(Jugadores, nABuscar, cantJugadores);
                                 break;
                             case "Salir del Juego":
                                 condition = false;
+                                conditionMenu = false;
+                                JOptionPane.showMessageDialog(null, "Gracias por jugar!", "Saludo Final",
+                                        JOptionPane.PLAIN_MESSAGE);
                                 break;
                             default:
                                 break;
@@ -338,7 +375,8 @@ public class demoRPG {
             j.setGano(true);
             bandera = false;
             demoRPG.cantGanadores++;
-            JOptionPane.showMessageDialog(null, "Has sobrevivido en " + intentosJugador + " intentos, eres libre!\nCantidad de Ganadores: "+demoRPG.getCantGanadores());
+            JOptionPane.showMessageDialog(null, "Has sobrevivido en " + intentosJugador
+                    + " intentos, eres libre!\nCantidad de Ganadores: " + demoRPG.getCantGanadores());
         } else if (saludJugador <= 0 && monstruo.getSalud() > 0) {
             j.setIntentos(intentosJugador);
             j.setGano(false);
@@ -402,24 +440,17 @@ public class demoRPG {
     public static void ordenarGanadores(Jugador[] Jugadores, int cantJugadores, int cantGanadores) {
 
         try {
-            if (cantJugadores == 0) {
-                JOptionPane.showMessageDialog(null, "Todavía no hay jugadores para mostrar.", "Error", 1);
-            } else if (cantGanadores == 0) {
-                JOptionPane.showMessageDialog(null, "Todavía no hay ganadores!", "Error", 1);
 
-            } else {
+            boolean cambios = true;
 
-                boolean cambios = true;
-
-                while (cambios) {
-                    cambios = false;
-                    for (int i = 0; i < Jugadores.length - 1; i++) {
-                        if (Jugadores[i].getIntentos() > Jugadores[i + 1].getIntentos()) {
-                            cambios = true;
-                            Jugador Jugador = Jugadores[i];
-                            Jugadores[i] = Jugadores[i + 1];
-                            Jugadores[i + 1] = Jugador;
-                        }
+            while (cambios) {
+                cambios = false;
+                for (int i = 0; i < Jugadores.length - 1; i++) {
+                    if (Jugadores[i].getIntentos() > Jugadores[i + 1].getIntentos()) {
+                        cambios = true;
+                        Jugador Jugador = Jugadores[i];
+                        Jugadores[i] = Jugadores[i + 1];
+                        Jugadores[i + 1] = Jugador;
                     }
                 }
             }
@@ -449,25 +480,19 @@ public class demoRPG {
     public static void ganadorTiempo(Jugador[] Jugadores, int cantJugadores, int cantGanadores) {
 
         try {
-            if (cantJugadores == 0) {
-                JOptionPane.showMessageDialog(null, "Todavía no hay jugadores", null, 1);
-            } else if (demoRPG.getCantGanadores() == 0) {
-                JOptionPane.showMessageDialog(null, "Todavía no hay ganadores", null, 1);
-            } else {
-                boolean cambios = true;
 
-                while (cambios) {
-                    cambios = false;
-                    for (int i = 0; i < Jugadores.length - 1; i++) {
-                        if (Jugadores[i].getTiempoJuego() > Jugadores[i + 1].getTiempoJuego()) {
-                            cambios = true;
-                            Jugador Jugador = Jugadores[i];
-                            Jugadores[i] = Jugadores[i + 1];
-                            Jugadores[i + 1] = Jugador;
-                        }
+            boolean cambios = true;
+
+            while (cambios) {
+                cambios = false;
+                for (int i = 0; i < Jugadores.length - 1; i++) {
+                    if (Jugadores[i].getTiempoJuego() > Jugadores[i + 1].getTiempoJuego()) {
+                        cambios = true;
+                        Jugador Jugador = Jugadores[i];
+                        Jugadores[i] = Jugadores[i + 1];
+                        Jugadores[i + 1] = Jugador;
                     }
                 }
-
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error", null, 1);
@@ -476,14 +501,57 @@ public class demoRPG {
     }
 
     /*
-     * MÉTODO AUMENTAR GANADORES
+     * BUSCAR JUGADOR POR ID
+     * (BÚSQUEDA BINARIA)
      */
 
-    // public static int aumentarGanadores(int cantGanadores) {
+    public static void buscarId(Jugador[] Jugadores, int nABuscar, int cantJugadores) {
 
-    //     cantGanadores += 1;
+        try {
+            /*
+             * ORDENO POR LAS DUDAS LA LISTA
+             * CON BUBBLE SORT
+             */
 
-    //     return cantGanadores;
-    // }
+            boolean cambios = true;
+
+            while (cambios) {
+                cambios = false;
+                for (int i = 0; i < Jugadores.length - 1; i++) {
+                    if (Jugadores[i].getId() > Jugadores[i + 1].getId()) {
+                        cambios = true;
+                        Jugador Jugador = Jugadores[i];
+                        Jugadores[i] = Jugadores[i + 1];
+                        Jugadores[i + 1] = Jugador;
+                    }
+                }
+            }
+
+            int min = 0;
+            int max = Jugadores.length - 1;
+
+            while (min <= max) {
+                int mid = (min + max) / 2;
+                int midN = Jugadores[mid].getId();
+
+                if (nABuscar == midN) {
+                    JOptionPane.showMessageDialog(null,
+                            "El Jugador " + Jugadores[mid].getNombre() + " posee el Id " + Jugadores[mid].getId(), null,
+                            1);
+                    return;
+                } else if (nABuscar < midN) {
+                    max = mid - 1;
+                } else {
+                    min = mid + 1;
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, "El número ingresado no coincide con ningún Id", "Error", 1);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No hay jugadores para mostrar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
 }

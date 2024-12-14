@@ -28,17 +28,12 @@ public class Guerrero extends Jugador {
      */
 
     public void cargarGuerrero(int nJugador) {
-        super.cargarJugador(nJugador, "Guerrero");
+        super.cargarJugador(nJugador, "Guerrero", id);
 
         String[] armas = {"Espada (Infringe +20 de daño)","Hacha (Infringe +30 de daño)","Palo (Infringe +10 de daño)"};
         
         int opciones = JOptionPane.showOptionDialog(null, "Elija un arma", "Elección de Arma", 0, 3, null, armas, armas[0]);
 
-        // System.out.println("\nElija un arma: "+
-        // "\n1. Espada (Infringe + 20 de daño)"+
-        // "\n2. Hacha (Infringe + 30 de daño)"+
-        // "\n3. Palo (Infringe + 10 de daño)");
-        // int arma = Integer.parseInt(ext.nextLine());
         switch (opciones) {
             case 0:
                 this.arma = new Arma("Espada", 20);
@@ -74,7 +69,6 @@ public class Guerrero extends Jugador {
 
         int daño = arma.getDaño();
 
-        // System.out.println("Infringiste -"+daño+" de daño al monstruo con "+arma.getNombre());
         JOptionPane.showMessageDialog(null, "Infringiste -"+daño+" de daño al monstruo con "+arma.getNombre(), "Ataque al Monstruo", 1);
 
 

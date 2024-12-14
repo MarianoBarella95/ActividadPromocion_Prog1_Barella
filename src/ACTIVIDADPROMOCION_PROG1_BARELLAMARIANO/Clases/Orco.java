@@ -24,7 +24,7 @@ public class Orco extends Jugador {
      */
 
     public void cargarOrco(int nJugador) {
-        super.cargarJugador(nJugador, "Orco");
+        super.cargarJugador(nJugador, "Orco", id);
     }
 
     /*
@@ -41,11 +41,9 @@ public class Orco extends Jugador {
 
     public void ataqueOrco(Monstruo monstruo, int dado) {
         if (dado == 6) {
-            // System.out.println("Infringiste -40 de daño al monstruo.");
             JOptionPane.showMessageDialog(null, "Infringiste -40 de daño al monstruo.");
             monstruo.recibirDaño(40);
         } else if (dado < 6) {
-            // System.out.println("Infringiste -20 de daño al monstruo.");
             JOptionPane.showMessageDialog(null, "Infringiste -20 de daño al monstruo.");
             monstruo.recibirDaño(20);
         } 

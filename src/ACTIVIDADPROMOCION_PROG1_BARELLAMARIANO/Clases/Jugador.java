@@ -8,12 +8,13 @@ public class Jugador {
     Scanner ext = new Scanner(System.in);
 
 
-    String nombre; 
-    int salud = 0;
-    int intentos = 0;
-    String raza;
-    Boolean gano;
-    long tiempoJuego;
+    protected String nombre; 
+    protected int salud = 0;
+    protected int id;
+    protected int intentos = 0;
+    protected String raza;
+    protected Boolean gano;
+    protected long tiempoJuego;
 
     /*
      * GETTERS & SETTERS
@@ -33,6 +34,14 @@ public class Jugador {
 
     public void setSalud(int salud) {
         this.salud = salud;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRaza() {
@@ -81,12 +90,11 @@ public class Jugador {
      * MÉTODO CARGAR JUGADOR 
      */
 
-    public void cargarJugador(int nJugador, String raza) {
-        // System.out.println("Ingrese el nombre del jugador "+nJugador+":");
-        // this.nombre = ext.nextLine();
+    public void cargarJugador(int nJugador, String raza, int id) {
         this.nombre = JOptionPane.showInputDialog("Ingresel el nombre del jugador "+nJugador);
         this.salud = 100;
         this.raza = raza;
+        this.id = id;
     }
 
     /*
@@ -99,9 +107,8 @@ public class Jugador {
     }
 
     public void mostrarJugador() {
-        String mensaje = String.format("\nNombre: %s\nIntentos: %d\n¿Ganó?: %s\nRaza: %s\nTiempo de Juego: %d segundos.", this.nombre, this.intentos, this.gano, this.raza, this.tiempoJuego);
-        // System.out.println(mensaje);
-        JOptionPane.showMessageDialog(null, mensaje, "Información del Jugador", 0);
+        String mensaje = String.format("\nId: %d\nNombre: %s\nIntentos: %d\n¿Ganó?: %s\nRaza: %s\nTiempo de Juego: %d segundos.",this.id, this.nombre, this.intentos, this.gano, this.raza, this.tiempoJuego);
+        JOptionPane.showMessageDialog(null, mensaje, "Información del Jugador", 1);
     }
     
 }

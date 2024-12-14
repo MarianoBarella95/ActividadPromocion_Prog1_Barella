@@ -3,7 +3,7 @@ package ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.Clases;
 import javax.swing.JOptionPane;
 
 public class Monstruo extends Jugador {
-    int salud = 100;
+    protected int salud = 100;
 
     /*
      * GETTERS & SETTERS
