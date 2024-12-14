@@ -2,7 +2,6 @@ package ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO;
 
 import ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.Clases.*;
 
-import javax.print.attribute.standard.JobOriginatingUserName;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.time.*;
@@ -20,7 +19,7 @@ public class demoRPG {
 
     public static void main(String[] args) throws Exception {
 
-        ImageIcon iconoMenu = new ImageIcon("src/guerrero.jpeg");
+        ImageIcon iconoMenu = new ImageIcon("src/escudo_menu.jpeg");
 
         boolean conditionMenu = true;
 
@@ -278,20 +277,28 @@ public class demoRPG {
                                 JOptionPane.showMessageDialog(null, mensaje, "Cantidad de Jugadores por Raza", 1);
                                 break;
                             case "Ver Ganador (Por menos tiempo)":
-                                if (cantJugadores == 0 || cantGanadores == 0) {
-                                    JOptionPane.showMessageDialog(null, "No hay jugadores o ganadores para mostrar.",
-                                            "Error", 1);
-                                } else {
-                                    ganadorTiempo(Jugadores, cantJugadores, cantGanadores);
-                                    for (int j = 0; j < Jugadores.length; j++) {
-                                        if (Jugadores[j].getGano()) {
-                                            JOptionPane.showMessageDialog(null,
-                                                    "El jugador " + Jugadores[j].getNombre() + " ganó con "
-                                                            + Jugadores[j].getTiempoJuego() + " segundos.",
-                                                    "Ganador por Tiempo", JOptionPane.INFORMATION_MESSAGE);
+                                /*
+                                * MOSTRAR GANADOR 
+                                * POR MENOS TIEMPO
+                                */    
+                                try {
+                                    if (cantJugadores == 0 || cantGanadores == 0) {
+                                        JOptionPane.showMessageDialog(null, "No hay jugadores o ganadores para mostrar.",
+                                                "Error", 1);
+                                    } else {
+                                        ganadorTiempo(Jugadores, cantJugadores, cantGanadores);
+                                        for (int j = 0; j < Jugadores.length; j++) {
+                                            if (Jugadores[j].getGano()) {
+                                                JOptionPane.showMessageDialog(null,
+                                                        "El jugador " + Jugadores[j].getNombre() + " ganó con "
+                                                                + Jugadores[j].getTiempoJuego() + " segundos.",
+                                                        "Ganador por Tiempo", JOptionPane.INFORMATION_MESSAGE);
+                                            }
+                                            break;
                                         }
-                                        break;
                                     }
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(null, "Ocurrió un error", "Error", 0);
                                 }
                                 break;
                             case "Buscar Jugador por Id":
@@ -503,16 +510,15 @@ public class demoRPG {
     /*
      * BUSCAR JUGADOR POR ID
      * (BÚSQUEDA BINARIA)
-     */
+     */ 
 
     public static void buscarId(Jugador[] Jugadores, int nABuscar, int cantJugadores) {
 
         try {
             /*
-             * ORDENO POR LAS DUDAS LA LISTA
+             * POR PRECAUCIÓN ORDENO LA LISTA
              * CON BUBBLE SORT
              */
-
             boolean cambios = true;
 
             while (cambios) {
