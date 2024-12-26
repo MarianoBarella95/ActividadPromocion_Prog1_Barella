@@ -75,7 +75,7 @@ razas del juego (Guerrero, Mago, Orco).
 
 <img src="src/ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO/img_readme/rtd_dañomonstruo2.png">
 
-## Derrota Jugador
+# Derrota Jugador
 - En el caso en que la salud del jugador llegue a 0, el jugador pierde y se le notifica que ha sido derrotado: 
 
 
