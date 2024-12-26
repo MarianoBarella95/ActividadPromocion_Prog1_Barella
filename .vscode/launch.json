@@ -9,6 +9,13 @@
             "name": "demoRPG",
             "request": "launch",
             "mainClass": "ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.demoRPG",
+            "projectName": "ActividadPromocion_Prog1_Barella_a2322bb3"
+        },
+        {
+            "type": "java",
+            "name": "demoRPG",
+            "request": "launch",
+            "mainClass": "ACTIVIDADPROMOCION_PROG1_BARELLAMARIANO.demoRPG",
             "projectName": "ActividadPromocion_Prog1_Barella_d4225cff"
         },
         {
